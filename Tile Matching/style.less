@@ -1,0 +1,63 @@
+@import "lib/bootstrap-2.3.2/less/bootstrap.less";
+
+#window {
+  position: relative; margin: auto;
+  #tiles .tile {
+    float: left; margin: .2%;
+    background: #1abc9c;
+    &.enabled { background: #2ecc71;
+      &:hover { background: #58d68d; }
+    }
+    &.visible { background: #ec7063; }
+    img { .size(100%, 100%); }
+  }
+  #tiles, #panel > * { position: absolute; transition: left .5s, top .5s; }
+  #panel {
+    i { color: blue; }
+    button {
+      .btn; font-size: 1em; line-height: 1em; padding: 0;
+      &.invisible { opacity: 0; height: 0; }
+      i { font-size: 4em; }
+    }
+    #reset-game, #end-game, #level-up { top: 0; left: 0; }
+    #language { top: 25%; left: 25%; }
+    #stats {
+      top: 75%; left: 75%;
+      .stat {
+        position: relative;
+        height: 25%; margin: 2%; padding: 2% 5%;
+        border: 1px solid green; background-color: rgba(127, 255, 0, .8);
+        font-size: 1.6em; font-weight: bold;
+        .value { float: right; margin-top: .25em; color: green; }
+        .progress-bar {
+          position: absolute;
+          top: 0; right: 0; bottom: 0; left: 0;
+          background-color: black;
+          z-index: -1;
+        }
+      }
+    }
+  }
+}
+
+@ratio: 4/5;              // Aspect ratio
+@margin: 1%;              // Button margin
+@size: 25% - 2*@margin;   // Button size
+
+#window.wide {
+  #tiles { .size(100%, @ratio*100%); }
+  #panel > * {
+    .size(@size, @ratio*@size);
+    margin: @margin @ratio*@margin;
+    left: @ratio*100% !important;
+  }
+}
+
+#window.narrow {
+  #tiles { .size(@ratio*100%, 100%); }
+  #panel > * {
+    .size(@ratio*@size, @size);
+    margin: @ratio*@margin @margin;
+    top: @ratio*100% !important;
+  }
+}
